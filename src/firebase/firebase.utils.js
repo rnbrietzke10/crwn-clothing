@@ -1,15 +1,15 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAQzYvZOp9Z8ofrIDKo40L8uwuLqwcjV3o",
-  authDomain: "crwn-db-8ec60.firebaseapp.com",
-  projectId: "crwn-db-8ec60",
-  storageBucket: "crwn-db-8ec60.appspot.com",
-  messagingSenderId: "976808189044",
-  appId: "1:976808189044:web:1bef9e619dcca112200521",
-  measurementId: "G-986273QXCS",
+  apiKey: 'AIzaSyAQzYvZOp9Z8ofrIDKo40L8uwuLqwcjV3o',
+  authDomain: 'crwn-db-8ec60.firebaseapp.com',
+  projectId: 'crwn-db-8ec60',
+  storageBucket: 'crwn-db-8ec60.appspot.com',
+  messagingSenderId: '976808189044',
+  appId: '1:976808189044:web:1bef9e619dcca112200521',
+  measurementId: 'G-986273QXCS',
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -30,7 +30,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         ...additionalData,
       });
     } catch (error) {
-      console.log("Error creating user", error.message);
+      console.log('Error creating user', error.message);
     }
   }
   return userRef;
@@ -45,7 +45,7 @@ export const addCollectionAndDocuments = async (
   const collectionRef = firestore.collection(collectionKey);
 
   const batch = firestore.batch();
-  objectsToAdd.forEach(obj => {
+  objectsToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
@@ -53,8 +53,8 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
-export const convertCollectionsSnapshotToMap = collections => {
-  const transformedCollection = collections.docs.map(doc => {
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
     const { title, items } = doc.data();
     return {
       routeName: encodeURI(title.toLowerCase()),
@@ -73,8 +73,8 @@ export const convertCollectionsSnapshotToMap = collections => {
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
 export default firebase;

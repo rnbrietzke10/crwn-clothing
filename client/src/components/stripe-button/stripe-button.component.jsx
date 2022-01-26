@@ -2,8 +2,8 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
-const StripeCheckoutButton = ({ price }) => {
-  const priceForStripe = price * 100;
+const StripeCheckoutButton = ({ total }) => {
+  const priceForStripe = total * 100;
   const publishableKey =
     'pk_test_51KEI7VLruGBnqXwFb11nTHkqa3Fu9AGc1Uj8wsC7Sd6AyyjUTyRd4g1jsgGS0Vx15CaRmKtkVw9Uby4rf9GZmPNF00KDElrbYa';
 
@@ -34,7 +34,7 @@ const StripeCheckoutButton = ({ price }) => {
       billingAddress
       shippingAddress
       image="https://svgshare.com/i/CUz.svg"
-      description={`Your total is $${price}`}
+      description={`Your total is $${total}`}
       amount={priceForStripe} // cents
       panelLabel="Pay Now"
       token={onToken}

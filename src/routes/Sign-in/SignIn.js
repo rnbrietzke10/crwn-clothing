@@ -8,6 +8,7 @@ import {
 } from '../../utils/firebase/firebase.utils';
 
 import './SignIn.styles.scss';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
 const SignIn = () => {
   useEffect(() => {
@@ -32,6 +33,7 @@ const SignIn = () => {
       <button onClick={signInWithGoogleRedirect}>
         Sign In With Google Redirect
       </button>
+      <SignUpForm />
     </div>
   );
 };

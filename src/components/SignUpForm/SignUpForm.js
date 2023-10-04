@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import {
   createAuthUserWithEmailAndPassword,
@@ -33,11 +33,9 @@ const SignUpForm = () => {
         password
       );
 
-      if (user) {
-        const userDocRef = await createUserDocumentFromAuth(user, {
-          displayName,
-        });
-      }
+      await createUserDocumentFromAuth(user, {
+        displayName,
+      });
 
       setFormFields(defaultFormFields);
     } catch (err) {

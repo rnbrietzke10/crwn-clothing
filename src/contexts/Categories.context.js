@@ -7,13 +7,13 @@ import {
 
 // import SHOP_DATA from '../shop-data.js';
 
-export const ProductsContext = createContext({
-  products: [],
-  setProducts: () => null,
+export const CategoriesContext = createContext({
+  categoriesMap: {},
+  setCategoriesMap: () => {},
 });
 
-export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+export const CategoriesProvider = ({ children }) => {
+  const [categoriesMap, setCategoriesMap] = useState({});
 
   /**Use to creste collection in firebase */
   // useEffect(() => {
@@ -23,14 +23,15 @@ export const ProductsProvider = ({ children }) => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments();
       console.log(categoryMap);
+      setCategoriesMap(categoryMap);
     };
     getCategoriesMap();
   }, []);
 
-  const value = { products, setProducts };
+  const value = { categoriesMap, setCategoriesMap };
   return (
-    <ProductsContext.Provider value={value}>
+    <CategoriesContext.Provider value={value}>
       {children}
-    </ProductsContext.Provider>
+    </CategoriesContext.Provider>
   );
 };

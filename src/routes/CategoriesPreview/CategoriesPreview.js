@@ -1,11 +1,10 @@
-import { useContext } from 'react';
-
-import { CategoriesContext } from '../../contexts/Categories.context';
+import { useSelector } from 'react-redux';
 
 import CategoryPreview from '../../components/CategoryPreview/CategoryPreview';
+import { selectCategoriesMap } from '../../store/categories/category.selector';
 
 const CategoriesPreview = () => {
-  const { categoriesMap } = useContext(CategoriesContext);
+  const categoriesMap = useSelector(selectCategoriesMap);
   return (
     <div className='category-preview-container'>
       {Object.keys(categoriesMap).map(title => {

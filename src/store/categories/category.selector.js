@@ -1,7 +1,15 @@
-export const selectCategoriesMap = state =>
-  state.categories.categories.reduce((acc, category) => {
-    const { title, items } = category;
+import { createSelector } from 'reselect';
 
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
+const selectCategories = (state) => state.categories;
+
+export const selectCategoriesMap = createSelector(
+  [selectCategories],
+  (categories) => {
+    return categories.categories.reduce((acc, category) => {
+      const { title, items } = category;
+
+      acc[title.toLowerCase()] = items;
+      return acc;
+    }, {});
+  }
+);

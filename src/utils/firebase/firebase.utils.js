@@ -125,3 +125,18 @@ export const onAuthStateChangedListener = (callback) => {
   if (!callback) return;
   return onAuthStateChanged(auth, callback);
 };
+
+// function for converting getting the cuurent user --> Redux-Saga Conversion
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
